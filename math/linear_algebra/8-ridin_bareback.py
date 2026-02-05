@@ -27,7 +27,6 @@ def mat_mul(mat1, mat2):
         row = []
         # Iterate through columns of mat2
         for j in range(len(mat2[0])):
-            
             # Calculate dot product
             element = 0
             for k in range(len(mat2)):
