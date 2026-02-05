@@ -62,3 +62,4 @@ def determinant(matrix):
         det += cofactor
 
     return det
+    
