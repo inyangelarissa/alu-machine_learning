@@ -34,9 +34,9 @@ class Normal:
                 raise ValueError("data must contain multiple values")
 
             self.mean = float(sum(data) / len(data))
-    squared_diff = [(x - self.mean) ** 2 for x in data]
-        
-        # Use the population standard deviation formula
+
+            squared_diff = [(x - self.mean) ** 2 for x in data]
+            # Use the population standard deviation formula
             self.stddev = (sum(squared_diff) / len(data)) ** 0.5
 
     def z_score(self, x):
