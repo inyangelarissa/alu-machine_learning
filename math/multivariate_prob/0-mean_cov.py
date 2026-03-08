@@ -42,4 +42,3 @@ def mean_cov(X):
     cov = np.dot(X_centered.T, X_centered) / (n - 1)
 
     return mean, cov
-    
