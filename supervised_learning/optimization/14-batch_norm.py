@@ -1,28 +1,25 @@
 #!/usr/bin/env python3
-""" Learing rate decay with tensorflow
+""" Batch Normalization with tensorflow
 """
 
+import tensorflow as tf
 
-def batch_norm(Z, gamma, beta, epsilon):
-    """ normalizes an unactivated output of a neural network using batch
-    normalization
+
+def create_batch_norm_layer(prev, n, activation):
+    """ Batch Normalization with tensorflow
 
     Args:
-        Z (numpy.ndarray): matrix to normalize shape (m, n)
-            m: number of data points
-            n: number of features
-        gamma (numpy.ndarray): shape (1, n)
-        contains the scales used for batch normalization
-        beta (numpy.ndarray): shape (1, n)
-        contains the offsets used for batch normalization
-        epsilon (float): small number used to avoid division by zero
-
-    Returns: the normalized Z matrix
-
+        prev (): is the activated output of the previous layer
+        n (int): is the number of nodes in the layer to be created
+        activation (): is the activation function that should be used on the
+        output of the layer
     """
-
-    mean = Z.mean(axis=0)
-    variance = Z.var(axis=0)
-    Z_norm = (Z - mean) / ((variance + epsilon) ** 0.5)
-    Z_tilda = gamma * Z_norm + beta
-    return Z_tilda
+    init = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
+    model = tf.layers.Dense(units=n, kernel_initializer=init)
+    Z = model(prev)
+    gamma = tf.Variable(tf.constant(1.0, shape=[n]), name='gamma')
+    beta = tf.Variable(tf.constant(0.0, shape=[n]), name='beta')
+    mean, variance = tf.nn.moments(Z, axes=[0])
+    epsilon = 1e-8
+    Z_norm = tf.nn.batch_normalization(Z, mean, variance, beta, gamma, epsilon)
+    return activation(Z_norm)
