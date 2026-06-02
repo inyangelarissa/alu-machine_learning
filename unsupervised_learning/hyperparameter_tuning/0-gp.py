@@ -38,9 +38,7 @@ class GaussianProcess:
             Kernel matrix (m, n)
         """
         # squared distance (m, n)
-        sqdist = np.sum(X1**2, 1).reshape(-1, 1) + \
-                 np.sum(X2**2, 1) - \
+        sqdist = np.sum(X1**2, 1).reshape(-1, 1) + \ np.sum(X2**2, 1) - \
                  2 * np.dot(X1, X2.T)
-
         return (self.sigma_f ** 2) * np.exp(-sqdist / (2 * self.l ** 2))
   
