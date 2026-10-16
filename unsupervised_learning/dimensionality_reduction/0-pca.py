@@ -23,7 +23,6 @@ def pca(X, var=0.95):
         W [numpy.ndarray of shape (d, nd)]: the weights matrix that
             maintains var fraction of X's original variance
             d: number of dimensions of each data point
-      
             nd: new dimensionality of the transformed X
     """
     # n, d = X.shape
