@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+
+
 """Fetch a GitHub user's location using the GitHub API."""
 
 import sys
